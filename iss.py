@@ -25,7 +25,14 @@ def iss_location(issApiUrl):
     if result.status_code == 200:
         message = result.json()
         dateAndTime = datetime.datetime.fromtimestamp(message["timestamp"])
+
+        issCoordinates = message['iss_position']
+
         print("\nAnja, we have made a request for ISS location at {}." .format(dateAndTime))
+
+
+        print("\nCurrent location coordinate of the space station are latitude: {}, longitude: {}."
+              .format(issCoordinates['latitude'], issCoordinates['longitude']))
 
     elif result.status_code == 404:
         print("The page is not reachable")
