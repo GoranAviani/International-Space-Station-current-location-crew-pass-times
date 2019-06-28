@@ -1,15 +1,18 @@
 import requests
 import datetime
 
-def get_result_from_iss(fullApiUrl):
-    result = requests.get(fullApiUrl)
+def get_result_from_iss(fullApiUrl, params = None):
+    if params == None:
+        result = requests.get(fullApiUrl)
+    else:
+        result = requests.get(fullApiUrl, params)
     if result.status_code == 200:
         message = result.json()
         return message
     elif result.status_code == 404:
         print("The page is not reachable")
     else:
-        print("Something has good wrong.")
+        print("Something has gone wrong.")
 
 def iss_crew(issApiUrl):
     issCrewUrl = "astros.json"
@@ -35,6 +38,18 @@ def iss_pass_times(issApiUrl):
     #lon The longitude of the place to predict passes -180..180 	degrees required
     #alt The altitude of the place to predict passes 0..10,000 	meters
     #n The number of passes to return 1..100
-    pass
 
-    message = get_result_from_iss(issApiUrl + issCrewUrl)
+    # payload = {'key1': 'value1', 'key2': 'value2'}
+    # r = requests.get('https://httpbin.org/get', params=payload)
+
+    issPassTimeUrl = "iss-pass.json"
+    mylat = "-39"
+    mylon = "-40"
+    myalt = "10"
+    numOfTimesIssPassesOver = "1"
+
+    requestData = {'lat' : mylat, 'lon' : mylon, 'alt' : myalt, 'n' : numOfTimesIssPassesOver}
+
+    message = get_result_from_iss(issApiUrl + issPassTimeUrl, requestData)
+
+    print(message)
