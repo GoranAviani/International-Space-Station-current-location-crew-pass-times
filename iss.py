@@ -60,5 +60,6 @@ def iss_pass_times(issApiUrl):
 
     requestData = {'lat' : userLat, 'lon' : userLon, 'alt' : userAlt, 'n' : numOfTimesIssPassesOver}
     message = get_result_from_requests(issApiUrl + issPassTimeUrl, requestData)
-
-    print(message)
+    seconds = message['response'][0]['duration']
+    time = datetime.datetime.fromtimestamp(message['response'][0]['risetime'])
+    print("Anja the ISS will be visible for {} seconds on {}" .format(seconds, time))

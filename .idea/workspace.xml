@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d45e38d1-88ca-437b-a5b1-9ce9d0968dc7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/International-Space-Station-current-location-crew-pass-times.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/International-Space-Station-current-location-crew-pass-times.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iss.py" beforeDir="false" afterPath="$PROJECT_DIR$/iss.py" afterDir="false" />
     </list>
@@ -18,7 +17,7 @@
         <entry file="file://$PROJECT_DIR$/iss.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+              <caret line="64" column="83" selection-start-line="64" selection-start-column="83" selection-end-line="64" selection-end-column="83" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -199,7 +198,21 @@
       <option name="project" value="LOCAL" />
       <updated>1561754147871</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Renaming get_result_from_iss to get_result_from_requests because get_result_from_requests function is to be used for all api calls">
+      <created>1561922032782</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1561922032782</updated>
+    </task>
+    <task id="LOCAL-00010" summary="using the ip-api api to get the users lat and long">
+      <created>1561922504553</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1561922504553</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -253,14 +266,16 @@
     <MESSAGE value="Refractoring the code and creating get_result_from_iss function that takes care of get calls" />
     <MESSAGE value="iss_pass_times api url link and description" />
     <MESSAGE value="iss_pass_times returns one json pass time from hard coded data" />
-    <option name="LAST_COMMIT_MESSAGE" value="iss_pass_times returns one json pass time from hard coded data" />
+    <MESSAGE value="Renaming get_result_from_iss to get_result_from_requests because get_result_from_requests function is to be used for all api calls" />
+    <MESSAGE value="using the ip-api api to get the users lat and long" />
+    <option name="LAST_COMMIT_MESSAGE" value="using the ip-api api to get the users lat and long" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/iss.py</url>
-          <line>53</line>
+          <line>60</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -277,7 +292,7 @@
     <entry file="file://$PROJECT_DIR$/iss.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+          <caret line="64" column="83" selection-start-line="64" selection-start-column="83" selection-end-line="64" selection-end-column="83" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
