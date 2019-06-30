@@ -1,8 +1,11 @@
 import requests
 import datetime
 
-#def user_location():
-#    requests.get(http://ip-api.com/json)
+def user_location():
+    message = get_result_from_requests("http://ip-api.com/json")
+    lon = message['lon']
+    lat = message['lat']
+    return lat, lon
 
 def get_result_from_requests(fullApiUrl, params = None):
     if params == None:
@@ -45,14 +48,17 @@ def iss_pass_times(issApiUrl):
     # payload = {'key1': 'value1', 'key2': 'value2'}
     # r = requests.get('https://httpbin.org/get', params=payload)
 
+    userLat, userLon = user_location()
+
+
     issPassTimeUrl = "iss-pass.json"
-    mylat = "-39"
-    mylon = "-40"
-    myalt = "10"
+    userAlt = "10"
     numOfTimesIssPassesOver = "1"
 
-    requestData = {'lat' : mylat, 'lon' : mylon, 'alt' : myalt, 'n' : numOfTimesIssPassesOver}
 
+
+
+    requestData = {'lat' : userLat, 'lon' : userLon, 'alt' : userAlt, 'n' : numOfTimesIssPassesOver}
     message = get_result_from_requests(issApiUrl + issPassTimeUrl, requestData)
 
     print(message)
