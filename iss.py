@@ -1,7 +1,10 @@
 import requests
 import datetime
 
-def get_result_from_iss(fullApiUrl, params = None):
+#def user_location():
+#    requests.get(http://ip-api.com/json)
+
+def get_result_from_requests(fullApiUrl, params = None):
     if params == None:
         result = requests.get(fullApiUrl)
     else:
@@ -16,7 +19,7 @@ def get_result_from_iss(fullApiUrl, params = None):
 
 def iss_crew(issApiUrl):
     issCrewUrl = "astros.json"
-    message = get_result_from_iss(issApiUrl + issCrewUrl)
+    message = get_result_from_requests(issApiUrl + issCrewUrl)
     print("\nAnja, there are " + str(message['number']) + " cosmonauts in space right now.")
     print("-------------------------------------------------- \nAnd ther are: \n")
     for x in message['people']:
@@ -24,7 +27,7 @@ def iss_crew(issApiUrl):
 
 def iss_location(issApiUrl):
     issLocationUrl = "iss-now.json"
-    message = get_result_from_iss(issApiUrl + issLocationUrl)
+    message = get_result_from_requests(issApiUrl + issLocationUrl)
     dateAndTime = datetime.datetime.fromtimestamp(message["timestamp"])
     issCoordinates = message['iss_position']
     print("\nAnja, we have made a request for ISS location at {}." .format(dateAndTime))
@@ -50,6 +53,6 @@ def iss_pass_times(issApiUrl):
 
     requestData = {'lat' : mylat, 'lon' : mylon, 'alt' : myalt, 'n' : numOfTimesIssPassesOver}
 
-    message = get_result_from_iss(issApiUrl + issPassTimeUrl, requestData)
+    message = get_result_from_requests(issApiUrl + issPassTimeUrl, requestData)
 
     print(message)
