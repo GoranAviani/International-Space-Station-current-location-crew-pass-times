@@ -53,13 +53,24 @@ def iss_pass_times(issApiUrl):
 
     issPassTimeUrl = "iss-pass.json"
     userAlt = "10"
-    numOfTimesIssPassesOver = 1
+    userInput = input("How many future pass time would you like to see? Choose between 1 and 5:\n")
+
+    if userInput.isnumeric():
+        userInput = int(userInput)
+        if userInput > 0 and userInput < 6:
+            numOfTimesIssPassesOver = userInput
+        else:
+            print("Please choose a number from 1 to 5.")
+    else:
+        print("Please type numbers only.")
 
 
 
 
     requestData = {'lat' : userLat, 'lon' : userLon, 'alt' : userAlt, 'n' : numOfTimesIssPassesOver}
     message = get_result_from_requests(issApiUrl + issPassTimeUrl, requestData)
-    seconds = message['response'][numOfTimesIssPassesOver-1]['duration']
-    time = datetime.datetime.fromtimestamp(message['response'][numOfTimesIssPassesOver-1]['risetime'])
-    print("Anja the ISS will be visible for {} seconds on {}" .format(seconds, time))
+
+    for x in message['response']:
+        seconds = x['duration']
+        time = datetime.datetime.fromtimestamp(x['risetime'])
+        print("Anja the ISS will be visible for {} seconds on {}" .format(seconds, time))
