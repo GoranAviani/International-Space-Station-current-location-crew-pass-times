@@ -38,7 +38,7 @@ def iss_location(issApiUrl):
           .format(issCoordinates['latitude'], issCoordinates['longitude']))
 
 
-def iss_pass_times(issApiUrl):
+def iss_pass_times(issApiUrl, numOfTimesIssPassesOver):
     #http://api.open-notify.org/iss-pass.json?lat=-39.0067&lon=-43.5363&alt=10&n=1
     #lat The latitude of the place to predict passes -80..80 	degrees 	required
     #lon The longitude of the place to predict passes -180..180 	degrees required
@@ -53,18 +53,6 @@ def iss_pass_times(issApiUrl):
 
     issPassTimeUrl = "iss-pass.json"
     userAlt = "10"
-    userInput = input("How many future pass time would you like to see? Choose between 1 and 5:\n")
-
-    if userInput.isnumeric():
-        userInput = int(userInput)
-        if userInput > 0 and userInput < 6:
-            numOfTimesIssPassesOver = userInput
-        else:
-            print("Please choose a number from 1 to 5.")
-    else:
-        print("Please type numbers only.")
-
-
 
 
     requestData = {'lat' : userLat, 'lon' : userLon, 'alt' : userAlt, 'n' : numOfTimesIssPassesOver}
