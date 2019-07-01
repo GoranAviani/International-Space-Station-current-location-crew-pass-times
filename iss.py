@@ -7,11 +7,25 @@ def user_location():
     lat = message['lat']
     return lat, lon
 
-def get_result_from_requests(fullApiUrl, params = None):
-    if params == None:
-        result = requests.get(fullApiUrl)
+def get_result_from_requests(callingFunction = None, params = None):
+    issApiUrl = "http://api.open-notify.org/"
+
+    urlEndpoint = ""
+    if callingFunction == "iss_crew":
+        urlEndpoint = "astros.json"
+    elif(callingFunction == "iss_location"):
+        urlEndpoint = "iss-now.json"
+    elif(callingFunction == "iss_pass_times"):
+        urlEndpoint = "iss-pass.json"
     else:
-        result = requests.get(fullApiUrl, params)
+        print("*** There is a unknown function making a request ***")
+
+    issApiUrl = issApiUrl + urlEndpoint
+
+    if params == None:
+        result = requests.get(issApiUrl)
+    else:
+        result = requests.get(issApiUrl, params)
     if result.status_code == 200:
         message = result.json()
         return message
@@ -20,17 +34,15 @@ def get_result_from_requests(fullApiUrl, params = None):
     else:
         print("Something has gone wrong.")
 
-def iss_crew(issApiUrl):
-    issCrewUrl = "astros.json"
-    message = get_result_from_requests(issApiUrl + issCrewUrl)
+def iss_crew():
+    message = get_result_from_requests("iss_crew")
     print("\nAnja, there are " + str(message['number']) + " cosmonauts in space right now.")
     print("-------------------------------------------------- \nAnd ther are: \n")
     for x in message['people']:
         print("* {} is in space craft {}. \n" .format(x['name'], x['craft']))
 
-def iss_location(issApiUrl):
-    issLocationUrl = "iss-now.json"
-    message = get_result_from_requests(issApiUrl + issLocationUrl)
+def iss_location():
+    message = get_result_from_requests("iss_location")
     dateAndTime = datetime.datetime.fromtimestamp(message["timestamp"])
     issCoordinates = message['iss_position']
     print("\nAnja, we have made a request for ISS location at {}." .format(dateAndTime))
@@ -38,7 +50,7 @@ def iss_location(issApiUrl):
           .format(issCoordinates['latitude'], issCoordinates['longitude']))
 
 
-def iss_pass_times(issApiUrl, numOfTimesIssPassesOver):
+def iss_pass_times(numOfTimesIssPassesOver):
     #http://api.open-notify.org/iss-pass.json?lat=-39.0067&lon=-43.5363&alt=10&n=1
     #lat The latitude of the place to predict passes -80..80 	degrees 	required
     #lon The longitude of the place to predict passes -180..180 	degrees required
@@ -49,14 +61,11 @@ def iss_pass_times(issApiUrl, numOfTimesIssPassesOver):
     # r = requests.get('https://httpbin.org/get', params=payload)
 
     userLat, userLon = user_location()
-
-
-    issPassTimeUrl = "iss-pass.json"
     userAlt = "10"
 
 
     requestData = {'lat' : userLat, 'lon' : userLon, 'alt' : userAlt, 'n' : numOfTimesIssPassesOver}
-    message = get_result_from_requests(issApiUrl + issPassTimeUrl, requestData)
+    message = get_result_from_requests("iss_location", requestData)
 
     for x in message['response']:
         seconds = x['duration']
