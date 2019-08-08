@@ -2,7 +2,7 @@ import requests
 import datetime
 
 def user_location():
-    message = get_result_from_requests("http://ip-api.com/json")
+    message = get_result_from_requests("user_location", "http://ip-api.com/json")
     lon = message['lon']
     lat = message['lat']
     return lat, lon
@@ -17,6 +17,8 @@ def get_result_from_requests(callingFunction = None, params = None):
         urlEndpoint = "iss-now.json"
     elif(callingFunction == "iss_pass_times"):
         urlEndpoint = "iss-pass.json"
+    elif (callingFunction == "user_location"):
+        issApiUrl = params
     else:
         print("*** There is a unknown function making a request ***")
 
@@ -61,11 +63,11 @@ def iss_pass_times(numOfTimesIssPassesOver):
     # r = requests.get('https://httpbin.org/get', params=payload)
 
     userLat, userLon = user_location()
+    print(userLat)
+    print(userLon)
     userAlt = "10"
-
-
     requestData = {'lat' : userLat, 'lon' : userLon, 'alt' : userAlt, 'n' : numOfTimesIssPassesOver}
-    message = get_result_from_requests("iss_location", requestData)
+    message = get_result_from_requests("iss_pass_times", requestData)
 
     for x in message['response']:
         seconds = x['duration']
